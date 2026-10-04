@@ -1,0 +1,177 @@
+{
+  "name": "MCP client",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "d0bd8c56-c014-4fb5-97f0-057011cfd4f8",
+      "name": "When chat message received",
+      "webhookId": "0b9fe10b-4dfc-48f6-8e24-a0f52a73c5d6"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "6e0294f4-3ebc-4ef6-a5b9-a652607f461f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://shambhavikm.app.n8n.cloud/mcp/763a9298-d072-46fa-833c-a0dacac5080d",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.4,
+      "position": [
+        560,
+        128
+      ],
+      "id": "05002b63-07ab-46de-96e6-d31ee14ac40c",
+      "name": "MCP Client own"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://api.githubcopilot.com/mcp/",
+        "authentication": "bearerAuth",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.4,
+      "position": [
+        560,
+        272
+      ],
+      "id": "6f516aeb-6fe0-44f7-bd03-e9be3e03b866",
+      "name": "MCP Client1 github",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "pTM8XnsQ3BZ3ZSHV",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        240
+      ],
+      "id": "38a5def2-251b-41a1-9387-1fdf2efe906c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        320,
+        240
+      ],
+      "id": "67cfc600-4a82-4eac-b256-0c5633b9aa1d",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client own": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client1 github": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "56fed81b-63a0-443e-adcf-08d0c3af90fe",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "49d95f68a9bac7b601ffd98aedb23742471e72f766471e9df5f77a478e0b43e8"
+  },
+  "nodeGroups": [],
+  "id": "naojgObCnrBD9OWz",
+  "tags": []
+}
